@@ -18,7 +18,7 @@ class ImageAdapter() : PagerAdapter() {
     }
 
     val image_resource = arrayListOf(
-        R.drawable.sample_01,
+        R.drawable.sample_06,
         R.drawable.sample_02,
         R.drawable.sample_03,
         R.drawable.sample_04,

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:weightSum="3">
+
+    <LinearLayout
+        android:layout_width="105dp"
+        android:layout_height="165dp"
+        android:layout_margin="4dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/flash_item_image"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@drawable/flash_item"
+            android:contentDescription="TODO" />
+
+        <TextView
+            android:id="@+id/stock"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/stock_detail"
+            android:paddingStart="3dp"
+            android:paddingLeft="3dp"
+            android:paddingTop="1sp"
+            android:text="@string/_2_in_stock"
+            android:textColor="@color/orange"
+            android:textSize="8sp"
+            tools:ignore="RtlSymmetry,SmallSp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="0.83"
+                android:paddingTop="4sp"
+                android:text="Rs."
+                android:textColor="@color/orange"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/item_price2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:text="710"
+                android:textColor="@color/orange" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="105dp"
+        android:layout_height="165dp"
+        android:layout_margin="4dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/flash_item_image2"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@drawable/flash_item" />
+
+        <TextView
+            android:id="@+id/stock2"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/stock_detail"
+            android:paddingStart="3dp"
+            android:paddingLeft="3dp"
+            android:paddingTop="1sp"
+            android:text="@string/_2_in_stock"
+            android:textColor="@color/orange"
+            android:textSize="8sp"
+            tools:ignore="RtlSymmetry,SmallSp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="0.83"
+                android:paddingTop="4sp"
+                android:text="Rs."
+                android:textColor="@color/orange"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@id/item_price2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:text="710"
+                android:textColor="@color/orange" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="105dp"
+        android:layout_height="165dp"
+        android:layout_margin="4dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/flash_item_image3"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@drawable/flash_item" />
+
+        <TextView
+            android:id="@+id/stock3"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/stock_detail"
+            android:paddingStart="3dp"
+            android:paddingLeft="3dp"
+            android:paddingTop="1sp"
+            android:text="@string/_2_in_stock"
+            android:textColor="@color/orange"
+            android:textSize="8sp"
+            tools:ignore="RtlSymmetry,SmallSp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="0.83"
+                android:paddingTop="4sp"
+                android:text="Rs."
+                android:textColor="@color/orange"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/item_price3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:text="710"
+                android:textColor="@color/orange" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

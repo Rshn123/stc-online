@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#D5E0EA"
-    tools:context=".MainActivity">
+    android:layout_width="match_parent"
+    android:background="@color/backgroudColor"
+    >
 
-    <include
-        layout="@layout/scan_search_bar_layout"
-        />
-    <RelativeLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/backgroudColor"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-        <include layout="@layout/image_slider_layout"/>
+        <include layout="@layout/scan_search_bar_layout" />
 
-        <LinearLayout
-            android:id="@+id/dot_container"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"/>
-    </RelativeLayout>
-</LinearLayout>
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/image_slider_layout" />
+
+            <LinearLayout
+                android:id="@+id/dot_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="105dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" />
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/banner_image"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="105dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/banner"/>
+        <include layout="@layout/stc_helper_layout" />
+        <include layout="@layout/flash_sale_show_more"/>
+        <include layout="@layout/flash_sale_item_layout"/>
+    </LinearLayout>
+</ScrollView>

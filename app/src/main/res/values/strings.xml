@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">STC Online</string>
+    <string name="hello">hello</string>
+    <string name="shopMore"><![CDATA[Shop More >]]></string>
+    <string name="flashSale">Flash Sale</string>
+    <string name="_11">11</string>
+    <string name="_2_in_stock">2 in Stock</string>
 </resources>
