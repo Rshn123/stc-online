@@ -4,12 +4,15 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="activeDot">#ED1111</color>
-    <color name="inactiveDot">#787676</color>
+    <color name="inactiveDot">#EDEDED</color>
     <color name="searchBox">#8391DA</color>
     <color name="backgroudColor">#FFFFFF</color>
     <color name="orange">#F44336</color>
     <color name="black">#000</color>
     <color name="white">#fff</color>
+    <color name="lightGrey">#F1E8E8</color>
     <color name="lightOrange">#F3B2AD</color>
+    <color name='lightBlack'>#393737</color>
+    <color name='gold'>#F3E28E</color>
 
 </resources>

@@ -1,47 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:andorid="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/backgroudColor"
-    >
+    android:layout_height="match_parent"
+    android:background="@color/backgroudColor">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:background="@color/backgroudColor"
-        android:orientation="vertical"
-        tools:context=".MainActivity">
-
-        <include layout="@layout/scan_search_bar_layout" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include layout="@layout/image_slider_layout" />
-
-            <LinearLayout
-                android:id="@+id/dot_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="105dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal" />
-        </RelativeLayout>
-        <ImageView
-            android:id="@+id/banner_image"
-            android:scaleType="fitXY"
-            android:layout_width="match_parent"
-            android:layout_height="105dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/banner"/>
-        <include layout="@layout/stc_helper_layout" />
-        <include layout="@layout/flash_sale_show_more"/>
-        <include layout="@layout/flash_sale_item_layout"/>
-    </LinearLayout>
-</ScrollView>
+        andorid:itemIconTint="@drawable/bottom_navigation_selector"
+        andorid:itemTextAppearanceActive="@style/BottomNavigationView.Active"
+        andorid:itemTextAppearanceInactive="@style/BottomNavigationView"
+        andorid:itemTextColor="@drawable/bottom_navigation_selector"
+        andorid:labelVisibilityMode="labeled"
+        andorid:menu="@menu/bottom_navigation_menu" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

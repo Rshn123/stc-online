@@ -3,97 +3,76 @@ package com.example.stconline
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import com.example.stconline.fragments.AccountFragment
+import com.example.stconline.fragments.CartFragment
+import com.example.stconline.fragments.HomeFragment
+import com.example.stconline.fragments.MessageFragment
+import com.example.stconline.item.Item
+import com.example.stconline.item.ItemAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.image_view_layout.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
-    lateinit var viewPager: ViewPager
-    var imageAdapter = ImageAdapter(this)
-    lateinit var timer: Timer
-    lateinit var linearLayout: LinearLayout
-    var current_position = 0
-    var custom_position = 0
 
+    lateinit var navigation: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (savedInstanceState == null) {
+            val fragment = HomeFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName).commit()
+        }
+        navigation = findViewById(R.id.bottom_navigation_view)
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        viewPager = findViewById(R.id.image_viewpager)
-        viewPager.adapter = imageAdapter
-        prepareDots(custom_position++)
-        slideShow()
-        viewPager.addOnPageChangeListener(object:OnPageChangeListener{
-            override fun onPageScrollStateChanged(state: Int) {
+    }
 
-            }
 
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-
-            }
-
-            override fun onPageSelected(position: Int) {
-                if(custom_position>4){
-                    custom_position = 0
+    private val mOnNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.navigation_home -> {
+                    val fragment = HomeFragment()
+                    fragmentInitilizer(fragment)
+                    return@OnNavigationItemSelectedListener true
                 }
-                prepareDots(custom_position++)
+
+                R.id.navigation_account -> {
+                    val fragment = AccountFragment()
+                    fragmentInitilizer(fragment)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_message -> {
+                    val fragment = MessageFragment()
+                    fragmentInitilizer(fragment)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_cart -> {
+                    val fragment = CartFragment()
+                    fragmentInitilizer(fragment)
+                    return@OnNavigationItemSelectedListener true
+                }
+                else ->
+                    false
             }
 
-        })
-    }
-
-    private fun slideShow() {
-        val handler = Handler()
-        val runnable = Runnable {
-            if (current_position == Integer.MAX_VALUE) {
-                current_position = 0
-            }
-            viewPager.setCurrentItem(current_position++, true)
-        }
-        timer = Timer()
-        timer.schedule(object : TimerTask() {
-            override fun run() {
-                handler.post(runnable)
-            }
-        }, 250, 2500)
-
-    }
-
-    private fun prepareDots(currentSlidePosition: Int) {
-        if (dot_container!!.childCount > 0) {
-            dot_container!!.removeAllViews()
         }
 
-        var dots = Array(5){ ImageView(this) }
-        for (i in 0..4) {
-            dots[i] = ImageView(this)
-            if (i == currentSlidePosition) {
-                dots[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.active_dot))
-            } else {
-                dots[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.not_active_dot))
-            }
-
-            val layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-            layoutParams.setMargins(4, 0, 4, 0)
-            dot_container.addView(dots[i], layoutParams)
-
-        }
+    fun fragmentInitilizer(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName).commit()
     }
 
 }

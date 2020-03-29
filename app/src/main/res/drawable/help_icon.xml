@@ -4,7 +4,7 @@
     <!-- The middle layer is green circle.-->
 
     <item>
-        <shape android:shape="oval">
+        <shape android:shape="ring">
             <size
                 android:width="50dp"
                 android:height="50dp" />
@@ -15,10 +15,12 @@
 
     <!-- The top layer is red ring.-->
     <item
-        android:left="10dp"
-        android:top="10dp"
-        android:right="10dp"
-        android:bottom="10dp">
+        android:drawable="@drawable/circle_cropped"
+        android:left="5dp"
+        android:top="5dp"
+
+        android:right="5dp"
+        android:bottom="5dp">
         <shape
             android:dither="true"
             android:shape="ring"

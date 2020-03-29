@@ -5,4 +5,17 @@
     <string name="flashSale">Flash Sale</string>
     <string name="_11">11</string>
     <string name="_2_in_stock">2 in Stock</string>
+    <string name="just_for_you">Just For You</string>
+    <string name="rs">Rs.</string>
+    <string name="home">Home</string>
+    <string name="account">Account</string>
+    <string name="message">Message</string>
+    <string name="cart">Cart</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recharge">Recharge</string>
+    <string name="gas_depo">Gas Depo</string>
+    <string name="special_offer">Special Offer</string>
+    <string name="vegetable_store">Vegetable Store</string>
 </resources>
