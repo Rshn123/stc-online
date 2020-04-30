@@ -3,11 +3,14 @@ package com.example.stconline.fragments
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,8 +25,12 @@ import com.google.android.material.slider.Slider
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
+import kotlinx.android.synthetic.main.flash_sale_show_more.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.net.URL
 import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 
 class HomeFragment() : Fragment() {
@@ -33,9 +40,15 @@ class HomeFragment() : Fragment() {
     private lateinit var itemView: RecyclerView
     lateinit var timer: Timer
 
-    val item = Array(16, { Item() })
-    val images = Array(5, { Image() })
+    val item = Array(16) { Item() }
+    val images = ArrayList<Image>()
     lateinit var sliderView: SliderView
+    var millisInFuture: Long = 847000
+
+    //View to pollute with minutes, second and hour
+    lateinit var minute: TextView
+    lateinit var second: TextView
+    lateinit var hour: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,9 +63,14 @@ class HomeFragment() : Fragment() {
         itemView = view!!.findViewById(R.id.item_recycle_view)
         //Slider view
         sliderView = view!!.findViewById(R.id.image_slider)
+        second = view!!.findViewById(R.id.second)
+        minute = view!!.findViewById(R.id.minute)
+        hour = view!!.findViewById(R.id.hour)
+
         //
         imageAdapter = ImageAdapter(context!!, images)
 
+        timer(millisInFuture, 1000).start()
 
         //Method to perfrom various things
 
@@ -61,6 +79,28 @@ class HomeFragment() : Fragment() {
         setSliderView()
         addImage()
 
+    }
+
+    private fun timer(millisInFutures: Long, countDownInterval: Long): CountDownTimer {
+        return object : CountDownTimer(millisInFutures, countDownInterval) {
+
+
+            override fun onTick(millisUntilFinished: Long) {
+                millisInFuture = millisUntilFinished
+                hour.text = (String.format(Locale.getDefault(), "%02d",(millisInFuture / 1000) / 360))
+                Log.d("154" ,"${hour.text}")
+                minute.text = (String.format(Locale.getDefault(), "%02d", (millisInFuture / 1000) / 60))
+                Log.d("154" ,"${minute.text}")
+                second.text = (String.format(Locale.getDefault(), "%02d", (millisInFuture / 1000) % 60))
+                Log.d("154" ,"${second.text}")
+
+            }
+
+            override fun onFinish() {
+                hour.text= ""
+            }
+
+        }
     }
 
     fun setSliderView() {
@@ -79,13 +119,14 @@ class HomeFragment() : Fragment() {
         item_recycle_view?.layoutManager = LinearLayoutManager(context)
         item_recycle_view?.layoutManager = GridLayoutManager(context, 2)
         item_recycle_view?.adapter = ItemAdapter(context!!, item)
+        item_recycle_view.smoothScrollToPosition(0)
 
     }
 
     fun addItem() {
         item.set(0, Item("Banana", 1400.0, 1.5F))
-        item.set(1, Item("Banana", 1400.0, 1.5F))
-        item.set(2, Item("Canana", 2400.0, 2.5F))
+        item.set(1, Item("Panana", 1400.0, 1.5F))
+        item.set(2, Item("Lanana", 2400.0, 2.5F))
         item.set(3, Item("Canana", 2400.0, 3.5F))
         item.set(4, Item("Danana", 3400.0, 4.5F))
         item.set(5, Item("Eanana", 4400.0, 2.5F))
@@ -103,11 +144,15 @@ class HomeFragment() : Fragment() {
     }
 
     fun addImage() {
-        images.set(0, Image(R.drawable.sample_02))
-        images.set(1, Image(R.drawable.sample_03))
-        images.set(2, Image(R.drawable.sample_04))
-        images.set(3, Image(R.drawable.sample_05))
-        images.set(4, Image(R.drawable.sample_06))
+        fun addImage() {
+            images.set(0, Image(R.drawable.sample_02))
+            images.set(1, Image(R.drawable.sample_03))
+            images.set(2, Image(R.drawable.sample_04))
+            images.set(3, Image(R.drawable.sample_05))
+            images.set(4, Image(R.drawable.sample_06))
+        }
+
+
     }
 
 }
