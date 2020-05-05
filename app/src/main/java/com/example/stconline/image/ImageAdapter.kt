@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.example.stconline.R
 import com.smarteist.autoimageslider.SliderViewAdapter
 import java.net.URL
