@@ -44,30 +44,28 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_home -> {
                     val fragment = HomeFragment()
-                    fragmentInitilizer(fragment)
+                    fragmentInitalizer(fragment)
                     return@OnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_account -> {
                     val fragment = AccountFragment()
-                    fragmentInitilizer(fragment)
+                    fragmentInitalizer(fragment)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_message -> {
                     val fragment = MessageFragment()
-                    fragmentInitilizer(fragment)
+                    fragmentInitalizer(fragment)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_cart -> {
                     val fragment = CartFragment()
-                    fragmentInitilizer(fragment)
+                    fragmentInitalizer(fragment)
                     return@OnNavigationItemSelectedListener true
                 }
                 else ->
@@ -76,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-    private fun fragmentInitilizer(fragment: Fragment) {
+    private fun fragmentInitalizer(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName).commit()
     }

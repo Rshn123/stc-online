@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.stconline.R
 import com.example.stconline.UserViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 class SignupActivity : AppCompatActivity() {
     lateinit var signUpTextView: TextView
@@ -23,10 +24,13 @@ class SignupActivity : AppCompatActivity() {
     var confirmPassword: EditText? = null
     lateinit var signUpButton: Button
     lateinit var viewHolder: UserViewModel
+    lateinit var firebaseAuth : FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
+
+        firebaseAuth = FirebaseAuth.getInstance()
 
         viewHolder = ViewModelProvider(
             this,
@@ -74,16 +78,23 @@ class SignupActivity : AppCompatActivity() {
                 phone!!.text.toString().toLong(),
                 password!!.text.toString()
             )
-            Toast.makeText(this, "Done", Toast.LENGTH_LONG).show()
 
-            startActivity(LoginActivity())
+            firebaseAuth.createUserWithEmailAndPassword(email!!.text.toString(), password!!.text.toString())
+                .addOnCompleteListener{task ->
+                    if(task.isSuccessful){
+                        startActivity(LoginActivity())
+                    }
+                    else{
+                        Toast.makeText(this, "Registration Failed", Toast.LENGTH_LONG).show()
+                    }
+                }
         }
     }
 
     fun startActivity(activity: Activity) {
         val intent = Intent(this, activity::class.java)
         startActivity(intent)
-        finish()
+        finishAffinity()
     }
 
     override fun onBackPressed() {

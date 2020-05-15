@@ -22,6 +22,7 @@ import com.example.stconline.image.Image
 import com.example.stconline.item.Item
 import com.example.stconline.item.ItemAdapter
 import com.google.android.material.slider.Slider
+import com.google.firebase.auth.FirebaseAuth
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
@@ -35,13 +36,12 @@ import kotlin.collections.ArrayList
 
 class HomeFragment() : Fragment() {
 
-
     lateinit var imageAdapter: ImageAdapter
     private lateinit var itemView: RecyclerView
     lateinit var timer: Timer
 
     val item = Array(16) { Item() }
-    val images = ArrayList<Image>()
+    private val images = Array(5){Image()}
     lateinit var sliderView: SliderView
     var millisInFuture: Long = 847000
 
@@ -49,6 +49,9 @@ class HomeFragment() : Fragment() {
     lateinit var minute: TextView
     lateinit var second: TextView
     lateinit var hour: TextView
+
+
+    //Firebase for logging out
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,12 +66,14 @@ class HomeFragment() : Fragment() {
         itemView = view!!.findViewById(R.id.item_recycle_view)
         //Slider view
         sliderView = view!!.findViewById(R.id.image_slider)
+
         second = view!!.findViewById(R.id.second)
         minute = view!!.findViewById(R.id.minute)
         hour = view!!.findViewById(R.id.hour)
 
+
         //
-        imageAdapter = ImageAdapter(context!!, images)
+        imageAdapter = ImageAdapter(context!!)
 
         timer(millisInFuture, 1000).start()
 
@@ -77,23 +82,17 @@ class HomeFragment() : Fragment() {
         addItem()
         setRecycleView()
         setSliderView()
-        addImage()
 
     }
 
     private fun timer(millisInFutures: Long, countDownInterval: Long): CountDownTimer {
         return object : CountDownTimer(millisInFutures, countDownInterval) {
 
-
             override fun onTick(millisUntilFinished: Long) {
                 millisInFuture = millisUntilFinished
                 hour.text = (String.format(Locale.getDefault(), "%02d",(millisInFuture / 1000) / 360))
-                Log.d("154" ,"${hour.text}")
                 minute.text = (String.format(Locale.getDefault(), "%02d", (millisInFuture / 1000) / 60))
-                Log.d("154" ,"${minute.text}")
                 second.text = (String.format(Locale.getDefault(), "%02d", (millisInFuture / 1000) % 60))
-                Log.d("154" ,"${second.text}")
-
             }
 
             override fun onFinish() {
@@ -103,7 +102,7 @@ class HomeFragment() : Fragment() {
         }
     }
 
-    fun setSliderView() {
+    private fun setSliderView() {
         sliderView.setSliderAdapter(imageAdapter)
         sliderView.setIndicatorAnimation(IndicatorAnimations.WORM)
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
@@ -114,45 +113,33 @@ class HomeFragment() : Fragment() {
         sliderView.startAutoCycle()
     }
 
-    fun setRecycleView() {
+    private fun setRecycleView() {
 
         item_recycle_view?.layoutManager = LinearLayoutManager(context)
         item_recycle_view?.layoutManager = GridLayoutManager(context, 2)
         item_recycle_view?.adapter = ItemAdapter(context!!, item)
+        item_recycle_view.isNestedScrollingEnabled = true
         item_recycle_view.smoothScrollToPosition(0)
 
     }
 
-    fun addItem() {
-        item.set(0, Item("Banana", 1400.0, 1.5F))
-        item.set(1, Item("Panana", 1400.0, 1.5F))
-        item.set(2, Item("Lanana", 2400.0, 2.5F))
-        item.set(3, Item("Canana", 2400.0, 3.5F))
-        item.set(4, Item("Danana", 3400.0, 4.5F))
-        item.set(5, Item("Eanana", 4400.0, 2.5F))
-        item.set(6, Item("Ganana", 5400.0, 3.5F))
-        item.set(7, Item("Fanana", 6400.0, 3.5F))
-        item.set(8, Item("Hanana", 7400.0, 4.8F))
-        item.set(9, Item("Ianana", 8400.0, 3.5F))
-        item.set(10, Item("Janana", 9400.0, 2.0F))
-        item.set(11, Item("Kanana", 10400.0, 1.5F))
-        item.set(12, Item("Lanana", 11400.0, 1.5F))
-        item.set(13, Item("Manana", 12400.0, 2.5F))
-        item.set(14, Item("Nanana", 13400.0, 3.5F))
-        item.set(15, Item("Oanana", 14400.0, 4.5F))
-
-    }
-
-    fun addImage() {
-        fun addImage() {
-            images.set(0, Image(R.drawable.sample_02))
-            images.set(1, Image(R.drawable.sample_03))
-            images.set(2, Image(R.drawable.sample_04))
-            images.set(3, Image(R.drawable.sample_05))
-            images.set(4, Image(R.drawable.sample_06))
-        }
-
-
+    private fun addItem() {
+        item[0] = Item("Banana", 1400.0, 1.5F)
+        item[1] = Item("Panana", 1400.0, 1.5F)
+        item[2] = Item("Lanana", 2400.0, 2.5F)
+        item[3] = Item("Canana", 2400.0, 3.5F)
+        item[4] = Item("Danana", 3400.0, 4.5F)
+        item[5] = Item("Eanana", 4400.0, 2.5F)
+        item[6] = Item("Ganana", 5400.0, 3.5F)
+        item[7] = Item("Fanana", 6400.0, 3.5F)
+        item[8] = Item("Hanana", 7400.0, 4.8F)
+        item[9] = Item("Ianana", 8400.0, 3.5F)
+        item[10] = Item("Janana", 9400.0, 2.0F)
+        item[11] = Item("Kanana", 10400.0, 1.5F)
+        item[12] = Item("Lanana", 11400.0, 1.5F)
+        item[13] = Item("Manana", 12400.0, 2.5F)
+        item[14] = Item("Nanana", 13400.0, 3.5F)
+        item[15] = Item("Oanana", 14400.0, 4.5F)
     }
 
 }

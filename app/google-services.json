@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "713231318864",
+    "firebase_url": "https://stc-online-8c164.firebaseio.com",
+    "project_id": "stc-online-8c164",
+    "storage_bucket": "stc-online-8c164.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713231318864:android:ebd0ae5a575af1e8793655",
+        "android_client_info": {
+          "package_name": "com.example.stconline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713231318864-ffn00ph0urib5njqvm905v0ggbn3r92e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stconline",
+            "certificate_hash": "c156797bd30f1974dde413d26c4e02904c84be48"
+          }
+        },
+        {
+          "client_id": "713231318864-d4vlnhp0gmrjtg0bds2055mg6manaqrt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0QngpvznTew5OKGg8MdUFWRxf7uhux98"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713231318864-d4vlnhp0gmrjtg0bds2055mg6manaqrt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -16,24 +16,31 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.stconline.MainActivity
 import com.example.stconline.R
 import com.example.stconline.UserViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     lateinit var signUpTextView: TextView
     private lateinit var loginButton: Button
     lateinit var username: EditText
     lateinit var password: EditText
-    private var viewHolder:UserViewModel? = null
-    var sharedPreferences:SharedPreferences? = null
-    val PREFES_NAME = "loginState"
+    private var viewHolder: UserViewModel? = null
+    var sharedPreferences: SharedPreferences? = null
+    val PREFES_NAME = "loginAdmin"
+    lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        firebaseAuth = FirebaseAuth.getInstance()
+
         //SharedPreference to store the login state
         sharedPreferences = getSharedPreferences(PREFES_NAME, 0)
-        val editor:SharedPreferences.Editor = sharedPreferences!!.edit()
-        viewHolder = ViewModelProvider(this, UserViewModel.Factory(applicationContext)).get(UserViewModel::class.java)
+        val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
+        viewHolder = ViewModelProvider(
+            this,
+            UserViewModel.Factory(applicationContext)
+        ).get(UserViewModel::class.java)
         //for login button
         loginButton = findViewById(R.id.login_button)
 
@@ -49,30 +56,36 @@ class LoginActivity : AppCompatActivity() {
             startActivity(SignupActivity())
         }
 
-        username.setOnFocusChangeListener{_, hasFocus ->
-            if(!hasFocus && !android.util.Patterns.EMAIL_ADDRESS.matcher(username.text.toString()).matches()){
+        username.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus && !android.util.Patterns.EMAIL_ADDRESS.matcher(username.text.toString()).matches()) {
                 username.error = "Not a valid Email Address"
             }
         }
 
         //when login button is clicked
-        loginButton.setOnClickListener{
-            val isValidOrNot = viewHolder!!.checkValidLogin(username.text.toString(), password.text.toString())
-            if(isValidOrNot){
-                startActivity(MainActivity())
-                editor.putBoolean("loginActive", true).apply()
-            }
-            else{
-                username.error = "The email or phone number you've entered doesn't match any account. Sign up for an account."
+        loginButton.setOnClickListener {
+            val isValidOrNot =
+                viewHolder!!.checkValidLogin(username.text.toString(), password.text.toString())
+            firebaseAuth.signInWithEmailAndPassword(
+                username.text.toString(),
+                password.text.toString()
+            ).addOnCompleteListener { task ->
+                if (task.isSuccessful || isValidOrNot) {
+                    startActivity(MainActivity())
+                    editor.putBoolean("userLoggedIn", true).apply()
+                } else {
+                    username.error =
+                        "The email or phone number you've entered doesn't match any account. Sign up for an account."
+                }
             }
         }
     }
 
     // method to start the activity when sign up textview is clicked
-    fun startActivity(activity: Activity) {
+    private fun startActivity(activity: Activity) {
         val intent = Intent(this, activity::class.java)
         startActivity(intent)
-        finish()
+        finishAffinity()
     }
 
     //when user presses the back from the mobile phone inside this loginActivity
